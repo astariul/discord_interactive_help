@@ -60,7 +60,7 @@ class Page:
             list: List of str where each str represent a reaction of a linked 
                 page.
         """
-        return self._all_links().keys()
+        return list(self._all_links().keys())
 
     def next_page(self, react):
         """Accessing the next Page.
