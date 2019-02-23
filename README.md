@@ -37,7 +37,7 @@ After defining your pages, you should link them together. You can do that using 
 
 `page_1.add_link(page_2, 'Click this icon to access page 2', '💩')`
 
-... Or using default emojis (numbers : '⃣, '⃣, etc...) :
+... Or using default emojis (numbers : 1️⃣, 2️⃣, 3️⃣, 4️⃣, etc...) :
 
 `root.add_link(page_1, 'Click this icon to access page 1')`
 
