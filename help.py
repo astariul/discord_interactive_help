@@ -57,7 +57,9 @@ class Help:
 
                 # If the user wants to quit, quit
                 if reaction.emoji == self.quit_react:
-                    return      # Only here we quit
+                    # Clean and quit. This is the only way to quit for now
+                    await self.client.delete_message(message)
+                    return
 
                 # Retrieve page based on reaction
                 next_page = current_page.next_page(reaction.emoji)
