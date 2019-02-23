@@ -42,7 +42,8 @@ class Help:
         # Never stop displaying help
         while True:
             # Send the current page to the user as private message
-            message = await self.client.send_message(member, current_page.msg)
+            message = await self.client.send_message(member, \
+                                                     current_page.content())
 
             # Display possible reactions
             for react in current_page.get_react_list() + [self.quit_react]:

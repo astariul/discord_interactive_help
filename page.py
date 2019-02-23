@@ -14,14 +14,17 @@ class Page:
 
     Attributes:
         msg (str): Message to display to the user when displaying the page.
+        connector (str): String used to connect each description of each link.
         links (dict of str to Page): List of linked pages, where each reaction 
             ID is linkied to the appropriate page.
+        links_msg (list of str): List of messages for each link. 
         meta_links (dict of str to Page): Similar to links, but contain special
             links (root, parent) : reaction should be displayed at the end.
     """
 
     def __init__(self, msg, root=None, parent=None, 
-            root_react=DEFAULT_ROOT_REACT, parent_react=DEFAULT_PARENT_REACT):
+            root_react=DEFAULT_ROOT_REACT, parent_react=DEFAULT_PARENT_REACT,
+            connector='\n'):
         """ Page constructor
 
         Constructor of the class Page. Create a Page with a message. 
@@ -35,9 +38,13 @@ class Page:
             parent (Page, optional): Parent Page. Defaults to None.
             root_react (str, optional): Reaction to access the root page.
             parent_react (str, optional): Reaction to access the parent page.
+            connector (str, optional): Connector to join each description of 
+                each link. Defaults to `\n`.
         """
         self.msg = msg
+        self.connector = connector
         self.links = collections.OrderedDict()
+        self.links_msg = []
         self.meta_links = collections.OrderedDict()
 
         if parent:
@@ -45,11 +52,14 @@ class Page:
         if root:
             self.meta_links[root_react] = root
 
-    def add_link(self, page, react=None):
+    def add_link(self, page, msg=None, react=None):
         """ Method to add a link to the page.
 
         Args:
             page (Page): Page to link.
+            msg (str, optional): Description of this link. This message is 
+                supposed to help the user understand to which page he is going
+                to be redirected if he clicks this link. Defaults to None.
             react (str, optional): Reaction to access the page. If None is given,
                 use defaults emoji (numbers). Defaults to None.
         """
@@ -59,8 +69,28 @@ class Page:
                 "There is not enough default reaction emoji. Please specify " \
                 "emoji explicitly."
             react = DEFAULT_LINK_REACTS[len(self.links)]
-            
+
         self.links[react] = page
+
+        # Add links message
+        if msg is None:
+            self.links_msg.append('')
+        else:
+            self.links_msg.append(msg)
+
+    def content(self):
+        """ Method to get the content of a page.
+
+        This method return the content of a page, concatenating the message of 
+        the page and the descriptions of each links of the page.
+
+        Returns:
+            str: The content of the page.
+        """
+        content = self.msg
+        for reaction, msg in zip(self.get_react_list(), self.links_msg):
+            content += self.connector + reaction + ' ' + msg
+        return content
 
     def get_react_list(self):
         """ Method to access the list of reactions of linked pages.

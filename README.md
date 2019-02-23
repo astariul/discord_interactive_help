@@ -21,7 +21,7 @@ Download the files `help.py` and `page.py` into your bot's code.
 Then, create your help manual by defining pages :
 
 ```
-root = page.Page('Welcome !\n\n1. Page1')
+root = page.Page('Welcome !\n')
 page_1 = page.Page('This is page 1', parent=root)
 page_2 = page.Page('This is page 2', parent=page_1, root=root)
 ```
@@ -35,11 +35,11 @@ page_2 = page.Page('This is page 2', parent=page_1, root=root)
 
 After defining your pages, you should link them together. You can do that using custom emoji :
 
-`page_1.add_link('💩', page_2)`
+`page_1.add_link(page_2, 'Click this icon to access page 2', '💩')`
 
 ... Or using default emojis (numbers : '⃣, '⃣, etc...) :
 
-`root.add_link(page_1)`
+`root.add_link(page_1, 'Click this icon to access page 1')`
 
 ---
 
