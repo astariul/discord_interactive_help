@@ -45,7 +45,7 @@ class Help:
             message = await self.client.send_message(member, current_page.msg)
 
             # Display possible reactions
-            for react in current_page.get_react_list():
+            for react in current_page.get_react_list() + [self.quit_react]:
                 await self.client.add_reaction(message, react)
 
             next_page = None
