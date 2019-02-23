@@ -3,16 +3,16 @@ A Discord python framework to display an interactive help easily.
 
 ## What is this repository
 
-This repository allow you to build a help page for your Discord bot really easily.
+This repository allow you to build an interactive help page for your Discord bot really easily.
 
 Example of interactive help :
 
-{insert GIF}
+![gif](https://user-images.githubusercontent.com/22237185/53283254-da5a3100-3786-11e9-95cd-cd4dd4859bd2.gif)
 
 ## Features
 
-* **Easy to naviguate** : Use reactions to naviguate through the Help manual.
-* **Customized reaction** : Use any emoji as naviguation icon.
+* 🔆 **Easy to naviguate** : Use reactions to naviguate through the Help manual.
+* ⚙ **Customized reaction** : Use any emoji as naviguation icon.
 
 ## How to use
 
@@ -26,7 +26,7 @@ page_1 = page.Page('This is page 1', parent=root)
 page_2 = page.Page('This is page 2', parent=page_1, root=root)
 ```
 
-*Note : Adding a parent page (with `parent` in the constructor) will create a button for going back to previous page automatically. Adding a root page (with `root` in the constructor) will create a button for going back to the beginning of the help manual.*
+*Note : Adding a parent page (with `parent` in the constructor) will create a button for going back to previous page automagically. Adding a root page (with `root` in the constructor) will create a button for going back to the beginning of the help manual automagically.*
 
 *Note 2 : You can customize the emoji for the parent/root link with `parent_react` and `root_react` in the constructor. Example :*
 `page_1 = page.Page('This is page 1', parent=root, parent_react='💩')`
@@ -57,7 +57,9 @@ And now, you can display help whenever you want ! Like this :
 
 ---
 
-**For a full working example, please take a look at `example/` folder. You can also look at [this Repl.it](https://repl.it/@NicolasRemond/example-of-interactive-help), where the example is implemented.**
+**For a full working example, please take a look at `example/` folder.**
+
+**You can also look at [this Repl.it](https://repl.it/@NicolasRemond/example-of-interactive-help), where the example is implemented.**
 
 ## Notes
 
