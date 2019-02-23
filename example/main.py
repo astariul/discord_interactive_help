@@ -10,7 +10,7 @@ global client
 client = discord.Client()
 
 # Create the page tree and the Help
-root = page.Page('Welcome to the Help interface ! This is interactive, you can simply react to interact with the help :)\n\nWhat do you want to know more about ?\n\n1⃣ How do you display pages ?\n2⃣ How can I put commands into the help system ?')
+root = page.Page('Welcome to the Help interface ! This is interactive, you can simply react to interact with the help :)\n\nWhat do you want to know more about ?\n\n2⃣ How do you display pages ?\n1⃣ How can I put commands into the help system ?')
 page_help = page.Page('Help pages are simply a tree of pages and the system naviguate throught it.\n\n1⃣ What about reaction ?\n2⃣ Can several people use it ?\n3⃣ Why the message displayed is slow ?', parent=root)
 page_cmd = page.Page('This is not implemented yet, but it will come soon !', parent=root)
 page_react = page.Page('The system wait the user to react (there is no timeout yet, we will see it later). \n\n\n\n\nThen based on that reaction, the system display the next help page.', root=root, parent=page_help)
@@ -18,11 +18,11 @@ page_everyone = page.Page('Everyone can use it at the same time ! But not togeth
 page_slow = page.Page('I know, its quite slow... This is because every reaction is added one by one (there is currently no way to add several reaction at the same time through discord API). If you find a better way to do it, please tell me !', root=root, parent=page_help)
 
 # Link pages together
-page_help.add_link('1⃣', page_react)
-page_help.add_link('2⃣', page_everyone)
-page_help.add_link('3⃣', page_slow)
-root.add_link('1⃣', page_help)
-root.add_link('2⃣', page_cmd)
+page_help.add_link(page_react)     # Use default emoji
+page_help.add_link(page_everyone)  # Use default emoji
+page_help.add_link(page_slow)      # Use default emoji
+root.add_link(page_help, '2⃣')      # Use custom emoji
+root.add_link(page_cmd, '1⃣')       # Use custom emoji
 
 global h
 h = help.Help(client, root)

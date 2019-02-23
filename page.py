@@ -2,6 +2,7 @@ import collections
 
 DEFAULT_PARENT_REACT = '🔙'
 DEFAULT_ROOT_REACT = '🔝'
+DEFAULT_LINK_REACTS = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣']
 
 class Page:
     """ Class representing a page of the help.
@@ -44,13 +45,21 @@ class Page:
         if root:
             self.meta_links[root_react] = root
 
-    def add_link(self, react, page):
+    def add_link(self, page, react=None):
         """ Method to add a link to the page.
 
         Args:
-            react (str): Reaction to access the page.
             page (Page): Page to link.
+            react (str, optional): Reaction to access the page. If None is given,
+                use defaults emoji (numbers). Defaults to None.
         """
+        if react is None:
+            # Use default emoji for reaction 
+            assert len(self.links) < len(DEFAULT_LINK_REACTS), \
+                "There is not enough default reaction emoji. Please specify " \
+                "emoji explicitly."
+            react = DEFAULT_LINK_REACTS[len(self.links)]
+            
         self.links[react] = page
 
     def get_react_list(self):

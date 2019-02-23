@@ -33,12 +33,13 @@ page_2 = page.Page('This is page 2', parent=page_1, root=root)
 
 ---
 
-After defining your pages, you should link them together :
+After defining your pages, you should link them together. You can do that using custom emoji :
 
-```
-page_1.add_link('💩', page_2)
-root.add_link('1⃣', page_1)
-```
+`page_1.add_link('💩', page_2)`
+
+... Or using default emojis (numbers : '⃣, '⃣, etc...) :
+
+`root.add_link(page_1)`
 
 ---
 
