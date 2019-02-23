@@ -1,9 +1,9 @@
 import os
-from keep_alive import keep_alive
+from example.keep_alive import keep_alive
 import discord
 
-from ... import help
-from ... import page
+import help
+import page
 
 # Start client
 global client
