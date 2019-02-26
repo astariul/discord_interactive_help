@@ -27,12 +27,63 @@ root.add_link(page_cmd, 'How can I put commands into the help system ?', '1⃣')
 global h
 h = help.Help(client, root)
 
+# Callbacks for guild functionnality
+async def display_guild_list(page, member):
+    # Call the database and get the list of guilds
+    guilds = ['Iron Guild', 'Mega Guild', 'Best people', 'No idea', 'Wanted']
+    # Fake example for sure :)
+
+    # We have access to the page, so we can modify its content (dynamically)
+    page.msg = "List of existing guilds :\n\n" + '\n'.join(guilds) + '\n'
+
+class RegisterGuild():
+    # Here we create a class in order to keep attribute accessible from any of the 3 callbacks we declare
+    # Since there is only 1 object for all users, we need to keep different states for different users.
+    # We do that with a simple dict, with the Discord ID being the key.
+    def __init__(self):
+        self.user_dict = {}
+
+    async def register_name(self, page, member, message):
+        self.user_dict[member.id] = {
+            'name': message.content,
+            'leader': None
+        }
+
+    async def register_leader(self, page, member, message):
+        self.user_dict[member.id]['leader'] = message.content
+
+    async def congrats(self, page, member):
+        page.msg = "Congrats ! You created the guild {}, leaded by {} !\n".format(self.user_dict[member.id]['name'], self.user_dict[member.id]['leader'])
+
+        # After finishing the command, don't forget to delete the entry, or entries will stack as user registers guild
+        self.user_dict.pop(member.id, None)
+
+# Now create the page tree for the guild functionnality
+root2 = page.Page('Welcome to this (fake) guild functionnality.\n\nHere we will see how you can make your bot even more interactive, by making each command completely interactive.\n\n')
+page_guild = page.Page('What would you like to do ?\n', parent=root2)
+page_guild_display = page.Page('', parent=page_guild, root=root2, callbacks=[display_guild_list]) # Here we don't display any static content. Content will be displayed by callback, dynamically
+
+reg = RegisterGuild()
+page_guild_register = page.Page('To register your guild, first type the name of your guild', parent=page_guild, root=root2, user_callbacks=[reg.register_name])
+page_guild_register2 = page.Page('Good ! Now type the name of the leader of the guild', root=root2, user_callbacks=[reg.register_leader])
+page_guild_end = page.Page('', root=root2, callbacks=[reg.congrats])
+
+page_guild_register2.add_link(page_guild_end, after_msg=True)
+page_guild_register.add_link(page_guild_register2, after_msg=True)
+page_guild.add_link(page_guild_display, 'Get the list of existing guilds', '👁‍🗨')
+page_guild.add_link(page_guild_register, 'Register your own guild', '➕')
+root2.add_link(page_guild, 'Let\'s get started !', '😀')
+
+global h2
+h2 = help.Help(client, root2)
 
 @client.event
 async def on_message(message):
     if message.author != client.user:       # Do not answer to myself
         if message.content.startswith('/help'):
             await h.display(message.author)
+        elif message.content.startswith('/guild'):
+            await h2.display(message.author)
 
 def main():
     """ Main
