@@ -1,66 +1,50 @@
 # Discord Interactive Help
-A Discord python framework to display an interactive help easily.
-
-## What is this repository
-
-This repository allow you to build an interactive help page for your Discord bot really easily.
-
-Example of interactive help :
 
 ![gif](https://user-images.githubusercontent.com/22237185/53283254-da5a3100-3786-11e9-95cd-cd4dd4859bd2.gif)
+
+A Discord python framework to display an interactive help easily.
 
 ## Features
 
 * 🔆 **Easy to naviguate** : Use reactions to naviguate through the Help manual.
 * ⚙ **Customized reaction** : Use any emoji as naviguation icon.
+* 🎮 **Commands support** : Go even further with interactive commands.
 
 ## How to use
 
-Download the files `help.py` and `page.py` into your bot's code.
-
-Then, create your help manual by defining pages :
+Download the files `help.py` and `page.py` into your bot's code, and create your own help manual :
 
 ```
+# Define each page
 root = page.Page('Welcome !\n')
 page_1 = page.Page('This is page 1', parent=root)
 page_2 = page.Page('This is page 2', parent=page_1, root=root)
-```
 
-*Note : Adding a parent page (with `parent` in the constructor) will create a button for going back to previous page automagically. Adding a root page (with `root` in the constructor) will create a button for going back to the beginning of the help manual automagically.*
+# Link pages together
+page_1.add_link(page_2, 'Click this icon to access page 2', '💩')
+root.add_link(page_1, 'Click this icon to access page 1')
 
-*Note 2 : You can customize the emoji for the parent/root link with `parent_react` and `root_react` in the constructor. Example :*
-`page_1 = page.Page('This is page 1', parent=root, parent_react='💩')`
-
----
-
-After defining your pages, you should link them together. You can do that using custom emoji :
-
-`page_1.add_link(page_2, 'Click this icon to access page 2', '💩')`
-
-... Or using default emojis (numbers : 1️⃣, 2️⃣, 3️⃣, 4️⃣, etc...) :
-
-`root.add_link(page_1, 'Click this icon to access page 1')`
-
----
-
-Finally define the help system using the root of your linked tree :
-
-```
+# Create the Help object
 client = discord.Client()
 h = Help(client, root)
+
+# And display the help !
+await h.display(message.author)
 ```
-
----
-
-And now, you can display help whenever you want ! Like this :
-
-`await h.display(message.author)`
 
 ---
 
 **For a full working example, please take a look at `example/` folder.**
 
-**You can also look at [this Repl.it](https://repl.it/@NicolasRemond/example-of-interactive-help), where the example is implemented.**
+This full working example is hosted in [this Repl.it](https://repl.it/@NicolasRemond/example-of-interactive-help).
+
+**Or you can simply experience the interactivity of this full working example by joining [this Discord server](https://discord.gg/cH6hUbw). Just type /help in the chat !** 
+
+## Further details
+
+The basic usage was shown in this README. If you are interested in more advanced usage, such as interactive commands, please take a look at the [wiki](https://github.com/astariul/discord_interactive_help/wiki) !
+
+If you can't find what you are looking for, you can open an [issue](https://github.com/astariul/discord_interactive_help/issues).
 
 ## Notes
 
