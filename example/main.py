@@ -16,7 +16,7 @@ client = discord.Client()
 # Create the page tree and the Help
 root = page.Page('Welcome to the Help interface ! This is interactive, you can simply react to interact with the help :)\n\nWhat do you want to know more about ?\n\n')
 page_help = page.Page('Help pages are simply a tree of pages and the system naviguate through this tree.\n\n', parent=root)
-page_cmd = page.Page('This is not implemented yet, but it will come soon !', parent=root)
+page_cmd = page.Page('It\' implemented ! Try it with /guild', parent=root)
 page_react = page.Page('The system wait the user to react (there is no timeout yet, maybe a future feature ?). \n\n\n\n\nThen based on that reaction, the system display the next help page.', root=root, parent=page_help)
 page_everyone = page.Page('Everyone can use it at the same time ! It is based on asyncio library. Since this is personal help, help message is sent to private channel with the user.', root=root, parent=page_help)
 page_slow = page.Page('I know, its quite slow... This is because every reaction is added one by one (there is currently no way to add several reaction at the same time through discord API). If you find a better way to do it, please tell me !', root=root, parent=page_help)
