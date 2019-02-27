@@ -42,7 +42,11 @@ This full working example is hosted in [this Repl.it](https://repl.it/@NicolasRe
 
 ## Further details
 
-The basic usage was shown in this README. If you are interested in more advanced usage, such as interactive commands, please take a look at the [wiki](https://github.com/astariul/discord_interactive_help/wiki) !
+The basic usage was shown in this README. If you are interested in more detailed explanations or advanced usage, such as interactive commands, please take a look at the [wiki](https://github.com/astariul/discord_interactive_help/wiki) !
+
+Example of advanced usage :
+
+![gif](https://user-images.githubusercontent.com/22237185/53492662-c4c56e00-3adc-11e9-8be8-1b10d9f85e8a.gif)
 
 If you can't find what you are looking for, you can open an [issue](https://github.com/astariul/discord_interactive_help/issues).
 
