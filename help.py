@@ -38,12 +38,13 @@ class Help:
         """
 
         current_page = self.page_tree
+        prev_input = []
 
         # Never stop displaying help
         while True:
             # Run basic callbacks before displaying the page
-            for callback in current_page.get_basic_callbacks():
-                await callback(current_page, member)
+            for callback in current_page.get_callbacks():
+                await callback(current_page, member, prev_input)
 
             # Send the current page to the user as private message
             bot_message = await self.client.send_message(member, \
@@ -73,12 +74,12 @@ class Help:
                     next_page = current_page.next_page(reaction.emoji)
 
                 elif reaction is None and message is not None:
-                    # Run callbacks requiring input
-                    for callback in current_page.get_input_callbacks():
-                        await callback(current_page, member, message)
-
                     # Retrieve page
                     next_page = current_page.next_page()
+
+            # Before going to next page, remember the input of the user if given
+            if message is not None:
+                prev_input.append(message)
 
             # Here the next page is valid. Clean current message and loop
             await self.client.delete_message(bot_message)

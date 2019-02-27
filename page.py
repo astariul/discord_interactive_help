@@ -21,15 +21,12 @@ class Page:
         meta_links (dict of str to Page): Similar to links, but contain special
             links (root, parent) : reaction should be displayed at the end.
         input_link (Page): Page to display if user input a message.
-        callbacks (list): List of basic callbacks (no user input) to call when 
-            displaying the page.
-        user_callbacks (list): List of callbacks with user input to call when 
-            displaying the page.
+        callbacks (list): List of callbacks to call when displaying the page.
     """
 
     def __init__(self, msg, root=None, parent=None, 
             root_react=DEFAULT_ROOT_REACT, parent_react=DEFAULT_PARENT_REACT,
-            connector='\n', callbacks=[], user_callbacks=[]):
+            connector='\n', callbacks=[]):
         """ Page constructor
 
         Constructor of the class Page. Create a Page with a message. 
@@ -45,10 +42,8 @@ class Page:
             parent_react (str, optional): Reaction to access the parent page.
             connector (str, optional): Connector to join each description of 
                 each link. Defaults to `\n`.
-            callbacks (list, optional): List of basic callbacks (no user input),
-                to be called when displaying page. Defaults to empty list.
-            user_callbacks (list, optional): List of callbacks with user input,
-                to be called when displaying page. Defaults to empty list.
+            callbacks (list, optional): List of callbacks to be called when 
+                displaying page. Defaults to empty list.
         """
         self.msg = msg
         self.connector = connector
@@ -63,7 +58,6 @@ class Page:
             self.meta_links[root_react] = root
 
         self.callbacks = callbacks
-        self.user_callbacks = user_callbacks
 
     def add_link(self, page, msg=None, react=None, after_msg=False):
         """ Method to add a link to the page.
@@ -133,14 +127,14 @@ class Page:
         """ Method to know if the Help display needs to wait for the user to 
         input something. 
 
-        If the page contains user callbacks, then the helper needs to wait the 
-        user to input something. In other cases, just do the default behavior
-        (wait for a reaction of the user).
+        If the page contains a link to a page waiting for an input, then the 
+        helper needs to wait the user to input something. In other cases, just 
+        do the default behavior (wait for a reaction of the user).
 
         Returns:
-            bool: True if there is some user callbacks to call, False otherwise.
+            bool: True if there is some links with input, False otherwise.
         """
-        return bool(self.user_callbacks)
+        return self.input_link is not None
 
     def next_page(self, react=None):
         """Accessing the next Page.
@@ -165,22 +159,13 @@ class Page:
         except KeyError:
             return None
 
-    def get_basic_callbacks(self):
+    def get_callbacks(self):
         """Accessing the list of basic callbacks.
 
         Returns:
             List of callbacks: Basics callbacks to call before page is displayed.
         """
         return self.callbacks
-
-    def get_input_callbacks(self):
-        """Accessing the list of callbacks requiring input.
-
-        Returns:
-            List of callbacks: Callbacks with input to call after user sent its
-                input.
-        """
-        return self.user_callbacks
 
     def _all_links(self):
         """ Private function
