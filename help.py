@@ -8,20 +8,20 @@ class Help:
 
     Attributes:
         client (Discord.Client): Discord client (to send messages). 
-        page_tree (Page): Page tree representing the whole help pages.
+        page_graph (Page): Page graph representing the whole help pages.
         quit_react (str): Reaction used to leave the help system.. 
     """
 
-    def __init__(self, client, page_tree, quit_react=DEFAULT_QUIT_REACT):
+    def __init__(self, client, page_graph, quit_react=DEFAULT_QUIT_REACT):
         """ Help constructor
 
         Args:
             client (Discord.Client): Discord client (to send messages). 
-            page_tree (Page): Page tree representing the whole help pages.
+            page_graph (Page): Page graph representing the whole help pages.
             quit_react (str): Reaction used to leave the help system.
         """
         self.client = client
-        self.page_tree = page_tree
+        self.page_graph = page_graph
         self.quit_react = quit_react
 
     async def display(self, member):
@@ -37,7 +37,7 @@ class Help:
                 displayed as a private message to him.
         """
 
-        current_page = self.page_tree
+        current_page = self.page_graph
         prev_input = []
 
         # Never stop displaying help

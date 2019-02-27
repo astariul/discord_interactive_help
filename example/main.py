@@ -13,9 +13,9 @@ client = discord.Client()
 #               Interactive help definitions start here                        #
 ################################################################################
 
-# Create the page tree and the Help
+# Create the page graph and the Help
 root = page.Page('Welcome to the Help interface ! This is interactive, you can simply react to interact with the help :)\n\nWhat do you want to know more about ?\n\n')
-page_help = page.Page('Help pages are simply a tree of pages and the system naviguate through this tree.\n\n', parent=root)
+page_help = page.Page('Help pages are simply a graph of pages and the system naviguate through this graph.\n\n', parent=root)
 page_cmd = page.Page('It\'s implemented ! Try it with /guild', parent=root)
 page_react = page.Page('The system wait the user to react (there is no timeout yet, maybe a future feature ?). \n\n\n\n\nThen based on that reaction, the system display the next help page.', root=root, parent=page_help)
 page_everyone = page.Page('Everyone can use it at the same time ! It is based on asyncio library. Since this is personal help, help message is sent to private channel with the user.', root=root, parent=page_help)
@@ -56,7 +56,7 @@ async def congrats(page, member, prev_input):
     # If database write fails :
     # page.msg = "Sorry, this guild already exist. Please choose another name\n"
 
-# Now create the page tree for the guild functionnality
+# Now create the page graph for the guild functionnality
 root2 = page.Page('Welcome to this (fake) guild functionnality.\n\nHere we will see how you can make your bot even more interactive, by making each command completely interactive.\n\n')
 page_guild = page.Page('What would you like to do ?\n', parent=root2)
 page_guild_display = page.Page('', parent=page_guild, root=root2, callbacks=[display_guild_list]) # Here we don't display any static content. Content will be displayed by callback, dynamically
