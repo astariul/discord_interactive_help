@@ -16,6 +16,8 @@ Download the package :
 
 `pip install discord-interactive`
 
+---
+
 Import the `Page` and `Help` objects into your bot's code, and create your own help manual :
 
 ```
