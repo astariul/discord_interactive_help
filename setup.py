@@ -6,7 +6,7 @@ with open('README.md', 'r') as rd:
 setup(
   name = 'discord_interactive',         # How you named your package folder (MyLib)
   packages = ['discord_interactive'],   # Chose the same as "name"
-  version = '1.0.5',      # Start with a small number and increase it with every change you make
+  version = '1.0.6',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'A package allowing you to display interactive help in Discord easily',   # Give a short description about your library
   long_description=description_full,
@@ -14,7 +14,7 @@ setup(
   author = 'Nicolas REMOND',                   # Type in your name
   author_email = 'remondnicola@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/astariul/discord_interactive_help',   # Provide either the link to your github or to your website
-  download_url = 'https://github.com/astariul/discord_interactive_help/archive/v1.0.4.tar.gz',    # I explain this later on
+  download_url = 'https://github.com/astariul/discord_interactive_help/archive/v1.0.6.tar.gz',    # I explain this later on
   keywords = ['Discord', 'Interactive', 'Help'],   # Keywords that define your package best
   install_requires=[],
   classifiers=[
