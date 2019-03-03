@@ -9,7 +9,7 @@ setup(
   author = 'Nicolas REMOND',                   # Type in your name
   author_email = 'remondnicola@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/astariul/discord_interactive_help',   # Provide either the link to your github or to your website
-  download_url = 'https://github.com/astariul/discord_interactive_help/archive/v1.0.tar.gz',    # I explain this later on
+  download_url = 'https://github.com/astariul/discord_interactive_help/archive/v1.0.1.tar.gz',    # I explain this later on
   keywords = ['Discord', 'Interactive', 'Help'],   # Keywords that define your package best
   install_requires=[],
   classifiers=[
