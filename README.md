@@ -12,13 +12,19 @@ A Discord python framework to display an interactive help easily.
 
 ## How to use
 
-Download the files `help.py` and `page.py` into your bot's code, and create your own help manual :
+Download the package :
+
+`pip install discord-interactive`
+
+Import the `Page` and `Help` objects into your bot's code, and create your own help manual :
 
 ```
+from discord_interactive import Page, Help
+
 # Define each page
-root = page.Page('Welcome !\n')
-page_1 = page.Page('This is page 1', parent=root)
-page_2 = page.Page('This is page 2', parent=page_1, root=root)
+root = Page('Welcome !\n')
+page_1 = Page('This is page 1', parent=root)
+page_2 = Page('This is page 2', parent=page_1, root=root)
 
 # Link pages together
 page_1.add_link(page_2, 'Click this icon to access page 2', '💩')
@@ -34,9 +40,7 @@ await h.display(message.author)
 
 ---
 
-**For a full working example, please take a look at `example/` folder.**
-
-This full working example is hosted in [this Repl.it](https://repl.it/@NicolasRemond/example-of-interactive-help).
+**For a full working example, please take at [this Repl.it](https://repl.it/@NicolasRemond/example-of-interactive-help).**
 
 **Or you can simply experience the interactivity of this full working example by joining [this Discord server](https://discord.gg/cH6hUbw). Just type /help in the chat !** 
 
