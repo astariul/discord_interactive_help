@@ -1,15 +1,12 @@
 from distutils.core import setup
 
-with open('README.md', 'r') as rd:
-    description_full = rd.read()
-
 setup(
   name = 'discord_interactive',         # How you named your package folder (MyLib)
   packages = ['discord_interactive'],   # Chose the same as "name"
-  version = '1.0.6',      # Start with a small number and increase it with every change you make
+  version = '1.1',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'A package allowing you to display interactive help in Discord easily',   # Give a short description about your library
-  long_description=description_full,
+  long_description='A package to help you build an interactive help for your Discord bot.\n\nPlease refer to the github page for more information : https://github.com/astariul/discord_interactive_help/tree/master\n\nYou can also refer to the wiki for detailed explanations : https://github.com/astariul/discord_interactive_help/wiki',
   long_description_content_type="text/markdown",
   author = 'Nicolas REMOND',                   # Type in your name
   author_email = 'remondnicola@gmail.com',      # Type in your E-Mail
