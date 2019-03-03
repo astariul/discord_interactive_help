@@ -1,9 +1,9 @@
 from distutils.core import setup
 
 setup(
-  name = 'discord-interactive',         # How you named your package folder (MyLib)
+  name = 'discord_interactive',         # How you named your package folder (MyLib)
   packages = ['discord_interactive'],   # Chose the same as "name"
-  version = '1.0.1',      # Start with a small number and increase it with every change you make
+  version = '1.0.2',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'A package allowing you to display interactive help in Discord easily',   # Give a short description about your library
   author = 'Nicolas REMOND',                   # Type in your name
