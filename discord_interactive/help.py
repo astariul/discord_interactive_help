@@ -1,4 +1,4 @@
-from page import Page
+from discord_interactive.page import Page
 import asyncio
 
 DEFAULT_QUIT_REACT = '❌'
