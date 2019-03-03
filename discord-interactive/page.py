@@ -26,7 +26,7 @@ class Page:
 
     def __init__(self, msg, root=None, parent=None, 
             root_react=DEFAULT_ROOT_REACT, parent_react=DEFAULT_PARENT_REACT,
-            connector='\n', callbacks=[]):
+            connector='\n\n', callbacks=[]):
         """ Page constructor
 
         Constructor of the class Page. Create a Page with a message. 
