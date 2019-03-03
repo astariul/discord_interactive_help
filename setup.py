@@ -9,12 +9,9 @@ setup(
   author = 'Nicolas REMOND',                   # Type in your name
   author_email = 'remondnicola@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/astariul/discord_interactive_help',   # Provide either the link to your github or to your website
-  download_url = 'https://github.com/astariul/discord_interactive_help/archive/pypi.zip',    # I explain this later on
+  download_url = 'https://github.com/astariul/discord_interactive_help/archive/v1.0.tar.gz',    # I explain this later on
   keywords = ['Discord', 'Interactive', 'Help'],   # Keywords that define your package best
-  install_requires=[            # I get to this in a second
-          'collections',
-          'asyncio',
-      ],
+  install_requires=[],
   classifiers=[
     'Development Status :: 5 - Production/Stable',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
     'Intended Audience :: Developers',      # Define that your audience are developers
