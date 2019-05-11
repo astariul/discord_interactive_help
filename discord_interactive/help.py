@@ -47,11 +47,9 @@ class Help:
                 await callback(current_page, member, prev_input)
 
             # Send the current page to the user as private message
-            dm_channel = member.dm_channel()
-            if dm_channel is None:
-                member.create_dm()
-                dm_channel = member.dm_channel()
-            bot_message = await dm_channel.send(current_page.content())
+            if member.dm_channel is None:
+                await member.create_dm()
+            bot_message = await member.dm_channel.send(current_page.content())
 
             # Display possible reactions
             for react in current_page.get_react_list() + [self.quit_react]:
@@ -70,7 +68,7 @@ class Help:
                     # If the user wants to quit, quit
                     if reaction.emoji == self.quit_react:
                         # Clean and quit. This is the only way to quit for now
-                        await bot_message.delete_message()
+                        await bot_message.delete()
                         return
 
                     # Retrieve page based on reaction
@@ -85,7 +83,7 @@ class Help:
                 prev_input.append(message)
 
             # Here the next page is valid. Clean current message and loop
-            await bot_message.delete_message()
+            await bot_message.delete()
             current_page = next_page
 
     async def _get_user_input(self, member, message, current_page):
@@ -116,9 +114,9 @@ class Help:
         def check_message(m):
             return m.author == member
 
-        task_react = asyncio.ensure_future(self.client.wait_for('reaction_add' \
+        task_react = asyncio.ensure_future(self.client.wait_for('reaction_add', \
                         check=check_reaction))
-        task_answer = asyncio.ensure_future(self.client.wait_for_message('message' \
+        task_answer = asyncio.ensure_future(self.client.wait_for('message', \
                         check=check_message))
         tasks = [task_react]    # Always wait for user reaction
         if current_page.need_user_input():
