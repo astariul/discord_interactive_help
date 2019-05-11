@@ -47,12 +47,15 @@ class Help:
                 await callback(current_page, member, prev_input)
 
             # Send the current page to the user as private message
-            bot_message = await self.client.send_message(member, \
-                                                     current_page.content())
+            dm_channel = member.dm_channel()
+            if dm_channel is None:
+                member.create_dm()
+                dm_channel = member.dm_channel()
+            bot_message = await dm_channel.send(current_page.content())
 
             # Display possible reactions
             for react in current_page.get_react_list() + [self.quit_react]:
-                await self.client.add_reaction(bot_message, react)
+                await bot_message.add_reaction(react)
 
             next_page = None
             # While user give wrong reaction/input, keep waiting for better input
@@ -67,7 +70,7 @@ class Help:
                     # If the user wants to quit, quit
                     if reaction.emoji == self.quit_react:
                         # Clean and quit. This is the only way to quit for now
-                        await self.client.delete_message(bot_message)
+                        await bot_message.delete_message()
                         return
 
                     # Retrieve page based on reaction
@@ -82,7 +85,7 @@ class Help:
                 prev_input.append(message)
 
             # Here the next page is valid. Clean current message and loop
-            await self.client.delete_message(bot_message)
+            await bot_message.delete_message()
             current_page = next_page
 
     async def _get_user_input(self, member, message, current_page):
@@ -107,10 +110,16 @@ class Help:
             message (Discord.Message): Message of the user, or None if the 
                 correct input was a user reaction.
         """
-        task_react = asyncio.ensure_future(self.client.wait_for_reaction( \
-                        user=member, message=message))
-        task_answer = asyncio.ensure_future(self.client.wait_for_message( \
-                        author=member, channel=message.channel))
+        def check_reaction(reaction, user):
+            return user == member
+
+        def check_message(m):
+            return m.author == member
+
+        task_react = asyncio.ensure_future(self.client.wait_for('reaction_add' \
+                        check=check_reaction))
+        task_answer = asyncio.ensure_future(self.client.wait_for_message('message' \
+                        check=check_message))
         tasks = [task_react]    # Always wait for user reaction
         if current_page.need_user_input():
             tasks.append(task_answer)   # Sometimes need to expect input too
