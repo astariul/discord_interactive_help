@@ -61,3 +61,5 @@ If you can't find what you are looking for, you can open an [issue](https://gith
 * *This idea was already known for some time, I didn't get the idea myself. I just wanted to share an easy framework to implement it for your own bot.*
 
 * *This is working only with the Python Discord API.*
+
+* *This package have been updated to work with the new version of `Discord py`. Just download the last version of the package (`pip install -U discord-interactive`). If you still use the old version of `Discord py`, then keep using the version `1.1` of this package (`pip install 'discord-interactive==1.1' --force-reinstall`)*
