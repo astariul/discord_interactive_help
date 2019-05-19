@@ -64,7 +64,7 @@ class Help:
 
             # Display possible reactions
             for react in page.reactions() + [self.quit_react]:
-                await bot_message.add_reaction(react)
+                asyncio.ensure_future(bot_message.add_reaction(react))
 
             next_link = None
             # While user give wrong reaction/input, keep waiting for better input

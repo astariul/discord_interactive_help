@@ -83,7 +83,7 @@ class Page:
         """
         # Create the appropriate link
         if reaction == MSG_LINK:        # Create a MsgLink
-            l = MsgLink(pages, description, callbacks)
+            self.msg_link = MsgLink(pages, description, callbacks)
         else:                           # Create a ReactLink
             # First, retrieve the default reaction if none was given
             if reaction is None:
@@ -187,10 +187,12 @@ class Page:
         Returns:
             str: Content to display to user.
         """
-        content = self.message
+        content = self.msg
         content += self.sep
-        content += self.links_sep.join([l.description for l in self.links])
-        content += self.links_sep + self.msg_link.description
+        content += self.links_sep.join([l.description for l in self.links if \
+            l.description is not None])
+        if self.msg_link is not None and self.msg_link.description is not None:
+            content += self.links_sep + self.msg_link.description
         return content
 
     def reactions(self):
@@ -202,8 +204,7 @@ class Page:
             list of str: List of reactions (str) that the user can use for this
                 page.
         """
-        return [l.reaction for l in self.links] + self.parent.reaction + 
-            self.root.reaction
+        return [l.reaction for l in self._all_links()]
 
     def need_user_input(self):
         """ Method to know if the Help display needs to wait for the user to 
@@ -236,7 +237,25 @@ class Page:
             return self.msg_link
 
         next_link = None
-        for l in self.links + [self.parent, self.root]:
+        for l in self._all_links():
             if l.reaction == reaction:
                 next_link = l
         return next_link
+
+    ############################## Private #####################################
+
+    def _all_links(self):
+        """ Private function
+
+        Return a list of available ReactLink for this page.
+
+        Returns:
+            list of ReactLink: All links.
+        """
+        all_links = self.links
+        if self.parent is not None:
+            all_links += [self.parent]
+        if self.root is not None:
+            all_links += [self.root]
+        return all_links
+

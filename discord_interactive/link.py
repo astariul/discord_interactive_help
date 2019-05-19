@@ -1,5 +1,3 @@
-from discord_interactive.page import Page
-
 class Link:
     """ Base class for all type of link.
 
