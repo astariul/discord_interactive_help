@@ -10,19 +10,6 @@ A Discord python framework to display an interactive help easily.
 * ⚙ **Customized reaction** : Use any emoji as naviguation icon.
 * 🎮 **Commands support** : Go even further with interactive commands.
 
-## Content
-
-| Section | Description |
-|-|-|
-| [Installation](#installation) | How to install the package |
-| [Overview](#overview) | Overview of the package |
-| [Usage](#usage) | Quickstart examples |
-| [Doc](#doc) |  Detailed documentation |
-| [Examples](#examples) | Detailed examples on how to fine-tune Bert |
-| [Notebooks](#notebooks) | Introduction on the provided Jupyter Notebooks |
-| [TPU](#tpu) | Notes on TPU support and pretraining scripts |
-| [Command-line interface](#Command-line-interface) | Convert a TensorFlow checkpoint in a PyTorch dump |
-
 ## How to use
 
 Download the package :
