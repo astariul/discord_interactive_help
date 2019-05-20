@@ -47,9 +47,9 @@ await h.display(message.author)
 
 ## Example
 
-**For a full working example, please take a look at [this Repl.it](https://repl.it/@NicolasRemond/example-of-interactive-help).**
+For a full working example, please take a look at [this Repl.it](https://repl.it/@NicolasRemond/example-of-interactive-help).
 
-**Or you can simply experience the interactivity of this full working example by joining [this Discord server](https://discord.gg/cH6hUbw). Just type /help in the chat !** 
+Or you can simply experience the interactivity of this full working example by joining [this Discord server](https://discord.gg/cH6hUbw). Just type /help in the chat !
 
 ## Further details
 
