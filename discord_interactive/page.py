@@ -3,7 +3,6 @@ from discord_interactive.link import ReactLink, MsgLink
 DEFAULT_PARENT_REACT = '🔙'
 DEFAULT_ROOT_REACT = '🔝'
 DEFAULT_LINK_REACTS = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣']
-MSG_LINK = '<msg_link>'
 
 class Page:
     """ Class representing a page of the help.
@@ -50,8 +49,8 @@ class Page:
 
     ####################### Construction of the Tree ###########################
 
-    def link(self, pages, reaction=MSG_LINK, description=None, callbacks=[], 
-             is_parent=True, parent_reaction=DEFAULT_PARENT_REACT):
+    def link(self, pages, reaction=None, description=None, callbacks=[], 
+             input=False, is_parent=True, parent_reaction=DEFAULT_PARENT_REACT):
         """ Page linker with reactions.
 
         Link a page to other pages by creating a link with reaction.
@@ -59,13 +58,13 @@ class Page:
         Args:
             pages (list of Page or Page): List of pages associated to this link.
             reaction (str, optional): Reaction needed to go through the link. 
-                If None is given, use a default reaction. If `<msg_link>` is 
-                given, this will be a MsgLink, and not a ReactLink. Defaults to 
-                `<msg_link>`.
+                If None is given, use a default reaction. Defaults to `None`.
             description (str, optional): Description of the link, to explain to 
                 user the effect of this link. Defaults to `None`.
             callbacks (list, optional): List of functions to call when taking 
                 this link. Defaults to empty list.
+            input (bool, optional): Boolean indicating if this is a MsgLink or 
+                not. Defaults to `False`.
             is_parent (bool, optional): Boolean indicating if the currentpage 
                 should be represented as the parent of the pages linked. 
                 Defaults to `True`.
@@ -82,7 +81,7 @@ class Page:
                 to the number of child pages.
         """
         # Create the appropriate link
-        if reaction == MSG_LINK:        # Create a MsgLink
+        if input:        # Create a MsgLink
             self.msg_link = MsgLink(pages, description, callbacks)
         else:                           # Create a ReactLink
             # First, retrieve the default reaction if none was given
