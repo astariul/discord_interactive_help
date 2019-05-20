@@ -50,7 +50,8 @@ class Page:
     ####################### Construction of the Tree ###########################
 
     def link(self, pages, reaction=None, description=None, callbacks=[], 
-             input=False, is_parent=True, parent_reaction=DEFAULT_PARENT_REACT):
+             user_input=False, is_parent=True, 
+             parent_reaction=DEFAULT_PARENT_REACT):
         """ Page linker with reactions.
 
         Link a page to other pages by creating a link with reaction.
@@ -63,8 +64,8 @@ class Page:
                 user the effect of this link. Defaults to `None`.
             callbacks (list, optional): List of functions to call when taking 
                 this link. Defaults to empty list.
-            input (bool, optional): Boolean indicating if this is a MsgLink or 
-                not. Defaults to `False`.
+            user_input (bool, optional): Boolean indicating if this is a MsgLink 
+                or not. Defaults to `False`.
             is_parent (bool, optional): Boolean indicating if the currentpage 
                 should be represented as the parent of the pages linked. 
                 Defaults to `True`.
@@ -81,7 +82,7 @@ class Page:
                 to the number of child pages.
         """
         # Create the appropriate link
-        if input:        # Create a MsgLink
+        if user_input:        # Create a MsgLink
             self.msg_link = MsgLink(pages, description, callbacks)
         else:                           # Create a ReactLink
             # First, retrieve the default reaction if none was given
