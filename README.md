@@ -10,6 +10,19 @@ A Discord python framework to display an interactive help easily.
 * ⚙ **Customized reaction** : Use any emoji as naviguation icon.
 * 🎮 **Commands support** : Go even further with interactive commands.
 
+## Content
+
+| Section | Description |
+|-|-|
+| [Installation](#installation) | How to install the package |
+| [Overview](#overview) | Overview of the package |
+| [Usage](#usage) | Quickstart examples |
+| [Doc](#doc) |  Detailed documentation |
+| [Examples](#examples) | Detailed examples on how to fine-tune Bert |
+| [Notebooks](#notebooks) | Introduction on the provided Jupyter Notebooks |
+| [TPU](#tpu) | Notes on TPU support and pretraining scripts |
+| [Command-line interface](#Command-line-interface) | Convert a TensorFlow checkpoint in a PyTorch dump |
+
 ## How to use
 
 Download the package :
@@ -25,30 +38,35 @@ from discord_interactive import Page, Help
 
 # Define each page
 root = Page('Welcome !\n')
-page_1 = Page('This is page 1', parent=root)
-page_2 = Page('This is page 2', parent=page_1, root=root)
+page_1 = Page('This is page 1')
+page_2 = Page('This is page 2')
 
 # Link pages together
-page_1.add_link(page_2, 'Click this icon to access page 2', '💩')
-root.add_link(page_1, 'Click this icon to access page 1')
+page_1.link(page_2, description='Click this icon to access page 2', reaction='💩')
+root.link(page_1, description='Click this icon to access page 1')
+
+# Set the root page as the root of other page (so user can come back with a specific reaction)
+root.root_of([page_1, page_2])
 
 # Create the Help object
 client = discord.Client()
 h = Help(client, root)
 
+...
+
 # And display the help !
 await h.display(message.author)
 ```
 
----
+## Example
 
-**For a full working example, please take at [this Repl.it](https://repl.it/@NicolasRemond/example-of-interactive-help).**
+**For a full working example, please take a look at [this Repl.it](https://repl.it/@NicolasRemond/example-of-interactive-help).**
 
 **Or you can simply experience the interactivity of this full working example by joining [this Discord server](https://discord.gg/cH6hUbw). Just type /help in the chat !** 
 
 ## Further details
 
-The basic usage was shown in this README. If you are interested in more detailed explanations or advanced usage, such as interactive commands, please take a look at the [wiki](https://github.com/astariul/discord_interactive_help/wiki) !
+The basic usage was shown in this README. If you are interested in more detailed explanations, advanced usage such as interactive commands, or documentation, please take a look at the [wiki](https://github.com/astariul/discord_interactive_help/wiki) !
 
 Example of advanced usage :
 
