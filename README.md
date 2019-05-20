@@ -53,7 +53,7 @@ Or you can simply experience the interactivity of this full working example by j
 
 ## Further details
 
-The basic usage was shown in this README. If you are interested in more detailed explanations, advanced usage such as interactive commands, or documentation, please take a look at the [wiki](https://github.com/astariul/discord_interactive_help/wiki) !
+The basic usage was shown in this README. If you are interested in **more detailed explanations**, **advanced usage** such as **interactive commands**, or **documentation**, please take a look at the [wiki](https://github.com/astariul/discord_interactive_help/wiki) !
 
 Example of advanced usage :
 
