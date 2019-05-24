@@ -79,6 +79,10 @@ class ReactLink(Link):
         super(ReactLink, self).__init__(pages, description, callbacks)
         self.reaction = reaction
 
+        # We need to update the description of this link to add the reaction
+        if self.description is not None:
+            self.description = self.reaction + ' ' + self.description
+
 class MsgLink(Link):
     """ Class for link using message to naviguate to next page.
     """

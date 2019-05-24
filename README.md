@@ -53,13 +53,19 @@ Or you can simply experience the interactivity of this full working example by j
 
 ## Further details
 
-The basic usage was shown in this README. If you are interested in **more detailed explanations**, **advanced usage** such as **interactive commands**, or **documentation**, please take a look at the [wiki](https://github.com/astariul/discord_interactive_help/wiki) !
+Check out the [wiki](https://github.com/astariul/discord_interactive_help/wiki) !
+
+You can also check the [documentation](https://github.com/astariul/discord_interactive_help/wiki/Documentation).
+
+---
+
+The basic usage was shown in this README. If you are interested in **advanced usage** such as **interactive commands**, please take a look at the source code (`main.py`) of the [Repl.it example](https://repl.it/@NicolasRemond/example-of-interactive-help).
 
 Example of advanced usage :
 
 ![gif](https://user-images.githubusercontent.com/22237185/53492662-c4c56e00-3adc-11e9-8be8-1b10d9f85e8a.gif)
 
-If you can't find what you are looking for, you can open an [issue](https://github.com/astariul/discord_interactive_help/issues).
+If you can't find what you are looking for, or need help about this library, you can open an [issue](https://github.com/astariul/discord_interactive_help/issues), we will be glad to help !
 
 ## Notes
 
@@ -68,3 +74,5 @@ If you can't find what you are looking for, you can open an [issue](https://gith
 * *This is working only with the Python Discord API.*
 
 * *This package have been updated to work with the new version of `Discord py`. Just download the last version of the package (`pip install -U discord-interactive`). If you still use the old version of `Discord py`, then keep using the version `1.1` of this package (`pip install 'discord-interactive==1.1' --force-reinstall`)*
+
+* *Version 3 of this package is out ! Version 3 brings a better and easier way to deal with multiple choices link, as well as a redesign of the whole API !*
