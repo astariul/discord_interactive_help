@@ -1,4 +1,5 @@
 from discord_interactive.page import Page
+from discord_interactive.link import Link, RootLink
 import asyncio
 
 DEFAULT_QUIT_REACT = '❌'
@@ -8,21 +9,27 @@ class Help:
 
     Attributes:
         client (Discord.Client): Discord client (to send messages). 
-        page_graph (Page): Page graph representing the whole help pages.
+        tree (RootLink): Link representing the whole help pages as a tree.
         quit_react (str): Reaction used to leave the help system.. 
     """
-
-    def __init__(self, client, page_graph, quit_react=DEFAULT_QUIT_REACT):
+    def __init__(self, client, pages, callbacks=[], quit_react=DEFAULT_QUIT_REACT):
         """ Help constructor
 
         Args:
             client (Discord.Client): Discord client (to send messages). 
-            page_graph (Page): Page graph representing the whole help pages.
-            quit_react (str): Reaction used to leave the help system.
+            pages (list of Page or Page): List of pages representing the 
+                starting point of the help.
+            callbacks (list, optional): List of functions to call when taking 
+                this link. Defaults to empty list.
+            quit_react (str, optional): Reaction used to leave the help system.
+                Defaults to `❌`.
         """
         self.client = client
-        self.page_graph = page_graph
         self.quit_react = quit_react
+
+        # Create a RootLink, representing the root of the help tree
+        root = RootLink(pages, callbacks)
+        self.tree = root
 
     async def display(self, member):
         """ Main function of the Help system.
@@ -37,31 +44,35 @@ class Help:
                 displayed as a private message to him.
         """
 
-        current_page = self.page_graph
+        current_link = self.tree
         prev_input = []
 
         # Never stop displaying help
         while True:
             # Run basic callbacks before displaying the page
-            for callback in current_page.get_callbacks():
-                await callback(current_page, member, prev_input)
+            for callback in current_link.callbacks:
+                await callback(current_link, member, prev_input)
+
+            # After running the callbacks, we can retrieve the page to be 
+            # displayed
+            page = current_link.page()
 
             # Send the current page to the user as private message
             if member.dm_channel is None:
                 await member.create_dm()
-            bot_message = await member.dm_channel.send(current_page.content())
+            bot_message = await member.dm_channel.send(page.content())
 
             # Display possible reactions
-            for react in current_page.get_react_list() + [self.quit_react]:
-                await bot_message.add_reaction(react)
+            for react in page.reactions() + [self.quit_react]:
+                asyncio.ensure_future(bot_message.add_reaction(react))
 
-            next_page = None
+            next_link = None
             # While user give wrong reaction/input, keep waiting for better input
-            while next_page is None:
+            while next_link is None:
                 # Get user input
                 reaction, message = await self._get_user_input(member, \
                                                                bot_message, \
-                                                               current_page)
+                                                               page)
 
                 # 2 cases : reaction or message
                 if reaction is not None and message is None:
@@ -71,12 +82,12 @@ class Help:
                         await bot_message.delete()
                         return
 
-                    # Retrieve page based on reaction
-                    next_page = current_page.next_page(reaction.emoji)
+                    # Else, retrieve the next link based on reaction
+                    next_link = page.next_link(reaction.emoji)
 
                 elif reaction is None and message is not None:
-                    # Retrieve page
-                    next_page = current_page.next_page()
+                    # Retrieve next link
+                    next_link = page.next_link()
 
             # Before going to next page, remember the input of the user if given
             if message is not None:
@@ -84,7 +95,7 @@ class Help:
 
             # Here the next page is valid. Clean current message and loop
             await bot_message.delete()
-            current_page = next_page
+            current_link = next_link
 
     async def _get_user_input(self, member, message, current_page):
         """ Function retrieving the user input.
