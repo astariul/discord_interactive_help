@@ -1,5 +1,7 @@
 # Discord Interactive Help
 
+[![Run on Repl.it](https://repl.it/badge/github/astariul/discord_interactive_help)](https://repl.it/github/astariul/discord_interactive_help)
+
 ![gif](https://user-images.githubusercontent.com/22237185/53283254-da5a3100-3786-11e9-95cd-cd4dd4859bd2.gif)
 
 A Discord python framework to display an interactive help easily.
