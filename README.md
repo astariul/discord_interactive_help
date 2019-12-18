@@ -49,7 +49,7 @@ await h.display(message.author)
 
 ## Example
 
-For a full working example, please take a look at [this Repl.it](https://repl.it/@NicolasRemond/example-of-interactive-help).
+For a full working example, please take a look at [this Repl.it](https://repl.it/@NicolasRemond/discordinteractivehelp).
 
 Or you can simply experience the interactivity of this full working example by joining [this Discord server](https://discord.gg/cH6hUbw). Just type /help in the chat !
 
@@ -61,7 +61,13 @@ You can also check the [documentation](https://github.com/astariul/discord_inter
 
 ---
 
-The basic usage was shown in this README. If you are interested in **advanced usage** such as **interactive commands**, please take a look at the source code (`main.py`) of the [Repl.it example](https://repl.it/@NicolasRemond/example-of-interactive-help).
+The basic usage was shown in this README. If you are interested in **advanced usage** such as **interactive commands**, please take a look at the source code (`main.py`) of the [Repl.it example](https://repl.it/@NicolasRemond/discordinteractivehelp).
+
+You can run this example on Repl.it (click on the badge at the top of README). Just add a `.env` file on Repl.it with your bot's token, like this :
+```
+DISCORD_BOT_SECRET=XXXXXXX
+```
+and hit run !
 
 Example of advanced usage :
 
