@@ -1,4 +1,4 @@
-from discord_interactive.page import Page
+from discord_interactive.page import Page, PageType
 from discord_interactive.link import Link, RootLink
 import asyncio
 
@@ -57,10 +57,17 @@ class Help:
             # displayed
             page = current_link.page()
 
-            # Send the current page to the user as private message
+            # Send the current page to the user as private message :
+            # Ensure the channel exist
             if member.dm_channel is None:
                 await member.create_dm()
-            bot_message = await member.dm_channel.send(page.content())
+
+            # Different page type should be sent differently
+            if page.type == PageType.MESSAGE:
+                bot_message = await member.dm_channel.send(page.get_message())
+            elif page.type == PageType.EMBED:
+                bot_message = await member.dm_channel.send(embed=page.get_embed(),
+                                                           content=None)
 
             # Display possible reactions
             for react in page.reactions() + [self.quit_react]:

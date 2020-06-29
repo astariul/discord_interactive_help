@@ -1,8 +1,21 @@
+from enum import Enum, auto
+
+import discord
+
 from discord_interactive.link import ReactLink, MsgLink
 
 DEFAULT_PARENT_REACT = '🔙'
 DEFAULT_ROOT_REACT = '🔝'
 DEFAULT_LINK_REACTS = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣']
+
+
+class PageType(Enum):
+    """ Existing type of page. The type of a page define how this page will be
+    displayed.
+    """
+    MESSAGE = auto()
+    EMBED = auto()
+
 
 class Page:
     """ Class representing a page of the help.
@@ -23,9 +36,12 @@ class Page:
             (for display).
         links_sep (str): String used to separate the links description (between
             each of them) (for display).
+        type (PageType): Type of the page. Can be `PageType.MESSAGE` or
+            `PageType.EMBED`.
     """
 
-    def __init__(self, msg='', sep='\n\n', links_sep='\n'):
+    def __init__(self, msg='', sep='\n\n', links_sep='\n', embed=True,
+                 **embed_kwargs):
         """ Page constructor
 
         Constructor of the class Page. Create a Page with a message.
@@ -38,6 +54,12 @@ class Page:
             links_sep (str, optional): String used to separate the links 
                 description (between each of them) (for display). Defaults to 
                 `\n`.
+            embed (bool, optional): If set to `True`, create a page of type
+                `PageType.EMBED`, if `False` the page type is
+                `PageType.MESSAGE`. Defaults to `True`.
+            embed_kwargs (dict): Others keywords arguments, used to initialize
+                the `Embed` for display. Only used if the type of the page is
+                `PageType.EMBED`.
         """
         self.msg = msg
         self.links = []
@@ -46,6 +68,8 @@ class Page:
         self.root = None
         self.sep = sep
         self.links_sep = links_sep
+        self.type = PageType.EMBED if embed else PageType.MESSAGE
+        self.embed_kwargs = embed_kwargs
 
     ####################### Construction of the Tree ###########################
 
@@ -177,9 +201,10 @@ class Page:
 
     ######################## Display of the Tree ###############################
 
-    def content(self):
+    def get_message(self):
         """
-        This method is called by the Help, to display the content of a Page.
+        This method is called by the Help if the page is a `PageType.MESSAGE`.
+        It returns the formatted content of the Page as a string.
         This will display the main message of the Page, as well as the message
         describing each Link of the Page.
         This method simply construct the string to send to the channel.
@@ -194,6 +219,18 @@ class Page:
         if self.msg_link is not None and self.msg_link.description is not None:
             content += self.links_sep + self.msg_link.description
         return content
+
+    def get_embed(self):
+        """
+        This method is called by the Help if the page is a `PageType.EMBED`.
+        It returns an `Embed` object, representing the formatted page.
+        This will display the main message of the Page, as well as the message
+        describing each Link of the Page.
+
+        Returns:
+            Embed: Embed to display to user.
+        """
+        return discord.Embed(description=self.get_message(), **self.embed_kwargs)
 
     def reactions(self):
         """

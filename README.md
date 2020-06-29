@@ -81,6 +81,15 @@ If you can't find what you are looking for, or need help about this library, you
 
 * *This is working only with the Python Discord API.*
 
-* *This package have been updated to work with the new version of `Discord py`. Just download the last version of the package (`pip install -U discord-interactive`). If you still use the old version of `Discord py`, then keep using the version `1.1` of this package (`pip install 'discord-interactive==1.1' --force-reinstall`)*
+## History
 
-* *Version 3 of this package is out ! Version 3 brings a better and easier way to deal with multiple choices link, as well as a redesign of the whole API !*
+* **v4**
+    * Added `Embed` support. Refer to the [official Discord documentation](https://discordpy.readthedocs.io/en/latest/api.html#embed) for more information.
+    * Message are now displayed as `Embed` by default. You can still create raw-message pages with the `embed=False` argument.
+
+* **v3**
+    * Refactor API
+
+* **v2.1**
+    * Added support for the new version of `Discord py`. Just download the last version of the package (`pip install -U discord-interactive`).
+    * If you still use the old version of `Discord py`, then keep using the version `1.1` of this package (`pip install 'discord-interactive==1.1' --force-reinstall`)
