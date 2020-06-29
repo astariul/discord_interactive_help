@@ -15,10 +15,12 @@ client = discord.Client()
 # Create the pages of the tree
 root = Page('Welcome to the Help interface ! This is interactive, you can simply react to interact with the help :)\n\nWhat do you want to know more about ?\n')
 page_help = Page('Help pages are simply a tree of pages and the system naviguate through this tree.\n')
-page_cmd = Page('It\' implemented ! Try it with /guild')
-page_react = Page('The system wait the user to react (there is no timeout yet, maybe a future feature ?). \n\n\n\n\nThen based on that reaction, the system display the next help page.')
+# Page are now Embed by default, you can add various fields like when you create an Embed
+page_cmd = Page('It\' implemented ! Try it with /guild', title="Guild functionality", color=0xE67E22)        # You can add a title, a color, etc... (See Discord Embed documentation for more)
+page_react = Page('The system wait the user to react (there is no timeout yet, maybe a future feature ?). \n\n\n\n\nThen based on that reaction, the system display the next help page.')   
 page_everyone = Page('Everyone can use it at the same time ! It is based on asyncio library. Since this is personal help, help message is sent to private channel with the user.')
-page_slow = Page('I know, its quite slow... This is because every reaction is added one by one (there is currently no way to add several reaction at the same time through discord API). If you find a better way to do it, please tell me !')
+# You can also display pages as basic messages if you prefer, with `embed=False`
+page_slow = Page('I know, its quite slow... This is because every reaction is added one by one (there is currently no way to add several reaction at the same time through discord API). If you find a better way to do it, please tell me !', embed=False)
 
 # Link pages together
 
