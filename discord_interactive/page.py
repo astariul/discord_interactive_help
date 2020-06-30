@@ -38,6 +38,9 @@ class Page:
             each of them) (for display).
         type (PageType): Type of the page. Can be `PageType.MESSAGE` or
             `PageType.EMBED`.
+        embed_kwargs (dict): Others keywords arguments, used to initialize
+            the `Embed` for display. Only used if the type of the page is
+            `PageType.EMBED`.
     """
 
     def __init__(self, msg='', sep='\n\n', links_sep='\n', embed=True,
