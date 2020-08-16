@@ -22,7 +22,7 @@ Download the package :
 
 Import the `Page` and `Help` objects into your bot's code, and create your own help manual :
 
-```
+```py
 from discord_interactive import Page, Help
 
 # Define each page
