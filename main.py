@@ -6,7 +6,11 @@ from discord_interactive import Help, Page
 
 # Start client
 global client
-client = discord.Client()
+intents = discord.Intents.default()
+intents.message_content = True
+intents.reactions = True
+intents.members = True
+client = discord.Client(intents=intents)
 
 ################################################################################
 #               Interactive help definitions start here                        #
