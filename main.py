@@ -1,5 +1,4 @@
 import os
-from keep_alive import keep_alive
 import discord
 
 from discord_interactive import Help, Page
@@ -110,12 +109,8 @@ async def on_message(message):
 ################################################################################
 
 def main():
-    """ Main
-
-    Main of the bot. Start the webserver (in order to keep the bot alive), and 
-    start the Discord Client.
+    """ Main. Start the Discord Client.
     """
-    keep_alive()
     token = os.environ.get("DISCORD_BOT_SECRET")
 
     client.run(token)

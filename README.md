@@ -1,7 +1,5 @@
 # Discord Interactive Help
 
-[![Run on Repl.it](https://repl.it/badge/github/astariul/discord_interactive_help)](https://repl.it/github/astariul/discord_interactive_help)
-
 ![gif](https://user-images.githubusercontent.com/22237185/53283254-da5a3100-3786-11e9-95cd-cd4dd4859bd2.gif)
 
 A Discord python framework to display an interactive help easily.
@@ -44,12 +42,16 @@ h = Help(client, root)
 ...
 
 # And display the help !
-await h.display(message.author)
+@client.event
+async def on_message(message):
+    if message.author != client.user:  # Do not answer to myself
+        if message.content.startswith('/help'):
+            await h.display(message.author)
 ```
 
 ## Example
 
-For a full working example, please take a look at [this Repl.it](https://repl.it/@NicolasRemond/discordinteractivehelp).
+For a full working example, please take a look at the script [`main.py`](https://github.com/astariul/discord_interactive_help/blob/main/main.py).
 
 Or you can simply experience the interactivity of this full working example by joining [this Discord server](https://discord.gg/cH6hUbw). Just type /help in the chat !
 
@@ -61,19 +63,27 @@ You can also check the [documentation](https://github.com/astariul/discord_inter
 
 ---
 
-The basic usage was shown in this README. If you are interested in **advanced usage** such as **interactive commands**, please take a look at the source code (`main.py`) of the [Repl.it example](https://repl.it/@NicolasRemond/discordinteractivehelp).
-
-You can run this example on Repl.it (click on the badge at the top of README). Just add a `.env` file on Repl.it with your bot's token, like this :
-```
-DISCORD_BOT_SECRET=XXXXXXX
-```
-and hit run !
+The basic usage was shown in this README. If you are interested in **advanced usage** such as **interactive commands**, please take a look at the source code in [`main.py`](https://github.com/astariul/discord_interactive_help/blob/main/main.py).
 
 Example of advanced usage :
 
 ![gif](https://user-images.githubusercontent.com/22237185/53492662-c4c56e00-3adc-11e9-8be8-1b10d9f85e8a.gif)
 
 If you can't find what you are looking for, or need help about this library, you can open an [issue](https://github.com/astariul/discord_interactive_help/issues), we will be glad to help !
+
+## Running in Docker
+
+A Dockerfile is available to run the example easily. Just build the image :
+
+```
+docker build -t discord_interactive_help .
+```
+
+And then start it with your Discord bot token :
+
+```
+DISCORD_BOT_SECRET="<your_token>" docker run -e DISCORD_BOT_SECRET discord_interactive_help
+```
 
 ## Notes
 
