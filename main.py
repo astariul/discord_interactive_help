@@ -66,6 +66,7 @@ h = Help(client, root)
 #            From here, it's for advanced use : interactive commands           #
 ################################################################################
 
+
 async def display_guild_list(link, member, prev_input):
     """Callback #1 for the interactive guild functionality : displaying
     dynamic guild list.
