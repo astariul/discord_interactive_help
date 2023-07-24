@@ -1,8 +1,14 @@
+"""Module containing the definition of the `Page` class, which is the main
+class to define the pages of your interactive help for your Discord bot.
+"""
+
+
 from enum import Enum, auto
 
 import discord
 
-from discord_interactive.link import ReactLink, MsgLink
+from discord_interactive.link import MsgLink, ReactLink
+
 
 DEFAULT_PARENT_REACT = "🔙"
 DEFAULT_ROOT_REACT = "🔝"
@@ -45,7 +51,7 @@ class Page:
     """
 
     def __init__(self, msg="", sep="\n\n", links_sep="\n", embed=True, **embed_kwargs):
-        """Page constructor
+        r"""Page constructor.
 
         Constructor of the class Page. Create a Page with a message.
 
@@ -124,10 +130,10 @@ class Page:
                 reaction = DEFAULT_LINK_REACTS[len(self.links)]
 
             # Then create a ReactLink
-            l = ReactLink(reaction, pages, description, callbacks)
+            link = ReactLink(reaction, pages, description, callbacks)
 
             # And link it to this page
-            self.links.append(l)
+            self.links.append(link)
 
         # Create the parent links
         if is_parent:
@@ -214,8 +220,7 @@ class Page:
     ######################## Display of the Tree ###############################
 
     def get_message(self):
-        """
-        This method is called by the Help if the page is a `PageType.MESSAGE`.
+        """This method is called by the Help if the page is a `PageType.MESSAGE`.
         It returns the formatted content of the Page as a string.
         This will display the main message of the Page, as well as the message
         describing each Link of the Page.
@@ -226,14 +231,13 @@ class Page:
         """
         content = self.msg
         content += self.sep
-        content += self.links_sep.join([l.description for l in self.links if l.description is not None])
+        content += self.links_sep.join([link.description for link in self.links if link.description is not None])
         if self.msg_link is not None and self.msg_link.description is not None:
             content += self.links_sep + self.msg_link.description
         return content
 
     def get_embed(self):
-        """
-        This method is called by the Help if the page is a `PageType.EMBED`.
+        """This method is called by the Help if the page is a `PageType.EMBED`.
         It returns an `Embed` object, representing the formatted page.
         This will display the main message of the Page, as well as the message
         describing each Link of the Page.
@@ -244,15 +248,14 @@ class Page:
         return discord.Embed(description=self.get_message(), **self.embed_kwargs)
 
     def reactions(self):
-        """
-        This method is called by the Help, to retrieve the list of reactions
+        """This method is called by the Help, to retrieve the list of reactions
         that the user can use to interact with the help.
 
         Returns:
             list of str: List of reactions (str) that the user can use for this
                 page.
         """
-        return [l.reaction for l in self._all_links()]
+        return [link.reaction for link in self._all_links()]
 
     def need_user_input(self):
         """Method to know if the Help display needs to wait for the user to
@@ -285,15 +288,15 @@ class Page:
             return self.msg_link
 
         next_link = None
-        for l in self._all_links():
-            if l.reaction == reaction:
-                next_link = l
+        for link in self._all_links():
+            if link.reaction == reaction:
+                next_link = link
         return next_link
 
     ############################## Private #####################################
 
     def _all_links(self):
-        """Private function
+        """Private function.
 
         Return a list of available ReactLink for this page.
 

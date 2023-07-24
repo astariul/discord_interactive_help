@@ -1,7 +1,12 @@
+"""Example of a Discord bot with interactive help."""
+
+
 import os
+
 import discord
 
 from discord_interactive import Help, Page
+
 
 # Start client
 global client
@@ -17,7 +22,8 @@ client = discord.Client(intents=intents)
 
 # Create the pages of the tree
 root = Page(
-    "Welcome to the Help interface ! This is interactive, you can simply react to interact with the help :)\n\nWhat do you want to know more about ?\n"
+    "Welcome to the Help interface ! This is interactive, you can simply react to interact with the help :)\n\n"
+    "What do you want to know more about ?\n"
 )
 page_help = Page("Help pages are simply a tree of pages and the system naviguate through this tree.\n")
 # Page are now Embed by default, you can add various fields like when you create an Embed
@@ -25,14 +31,17 @@ page_cmd = Page(
     "It' implemented ! Try it with /guild", title="Guild functionality", color=0xE67E22
 )  # You can add a title, a color, etc... (See Discord Embed documentation for more)
 page_react = Page(
-    "The system wait the user to react (there is no timeout yet, maybe a future feature ?). \n\n\n\n\nThen based on that reaction, the system display the next help page."
+    "The system wait the user to react (there is no timeout yet, maybe a future feature ?). \n\n\n\n\nThen based on "
+    "that reaction, the system display the next help page."
 )
 page_everyone = Page(
-    "Everyone can use it at the same time ! It is based on asyncio library. Since this is personal help, help message is sent to private channel with the user."
+    "Everyone can use it at the same time ! It is based on asyncio library. Since this is personal help, help message "
+    "is sent to private channel with the user."
 )
 # You can also display pages as basic messages if you prefer, with `embed=False`
 page_slow = Page(
-    "I know, its quite slow... This is because every reaction is added one by one (there is currently no way to add several reaction at the same time through discord API). If you find a better way to do it, please tell me !",
+    "I know, its quite slow... This is because every reaction is added one by one (there is currently no way to add "
+    "several reaction at the same time through discord API). If you find a better way to do it, please tell me !",
     embed=False,
 )
 
@@ -57,9 +66,10 @@ h = Help(client, root)
 #            From here, it's for advanced use : interactive commands           #
 ################################################################################
 
-
-# Callbacks for guild functionnality
 async def display_guild_list(link, member, prev_input):
+    """Callback #1 for the interactive guild functionality : displaying
+    dynamic guild list.
+    """
     # Call the database and get the list of guilds
     guilds = ["Iron Guild", "Mega Guild", "Best people", "No idea", "Wanted"]
     # Fake example for sure :)
@@ -69,6 +79,9 @@ async def display_guild_list(link, member, prev_input):
 
 
 async def congrats(link, member, prev_input):
+    """Callback #2 for the interactive guild functionality : checking if the
+    requested name is already taken, and display the right message.
+    """
     # Write to request to database
     guild_name = prev_input[-2].content  # Always use minus to access messages
     leader_name = prev_input[-1].content
@@ -85,7 +98,8 @@ async def congrats(link, member, prev_input):
 
 # Now create the page tree for the guild functionnality
 root2 = Page(
-    "Welcome to this (fake) guild functionnality.\n\nHere we will see how you can make your bot even more interactive, by making each command completely interactive.\n\n"
+    "Welcome to this (fake) guild functionnality.\n\nHere we will see how you can make your bot even more interactive,"
+    " by making each command completely interactive.\n\n"
 )
 page_guild = Page("What would you like to do ?\n")
 page_guild_display = Page(
@@ -98,7 +112,8 @@ page_guild_end2 = Page("Sorry, this guild already exist...")
 
 # Link the pages
 
-# Here, after registering a guild might lead to 2 income : either the register is successful, or it's not. Depending on the callback, the choice of page to display will be different
+# Here, after registering a guild might lead to 2 income : either the register is successful, or it's not
+# Depending on the callback, the choice of page to display will be different
 page_guild_register2.link(
     [page_guild_end1, page_guild_end2], is_parent=False, callbacks=congrats, user_input=True
 )  # We set user_input to true, so this is a Message Link. And we don't want to have a parent link
@@ -123,6 +138,10 @@ h2 = Help(client, root2)
 
 @client.event
 async def on_message(message):
+    """Write your bot here ! For this example, the bot does nothing but
+    displaying the interactive help (either the basic example with `/help` or
+    the advanced example with `/guild`).
+    """
     if message.author != client.user:  # Do not answer to myself
         if message.content.startswith("/help"):
             await h.display(message.author)

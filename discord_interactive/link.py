@@ -1,3 +1,9 @@
+"""Module containing the definition of the `Link` classes. These classes are
+not public-facing, they are used only internally.
+User can create links using the `link()` method in the `Page` class.
+"""
+
+
 class Link:
     """Base class for all type of link.
 
@@ -21,7 +27,7 @@ class Link:
     """
 
     def __init__(self, pages, description=None, callbacks=[]):
-        """Link constructor
+        """Link constructor.
 
         Create a Link with a list of child pages, a description, and
         callbacks optionally.
@@ -47,8 +53,7 @@ class Link:
         self.path = 0
 
     def page(self):
-        """
-        This method is called by the Help, after calling the callbacks.
+        """This method is called by the Help, after calling the callbacks.
         So the path was updated (or not) to select the right page, and we should
         return the appropriate page.
 
@@ -66,7 +71,7 @@ class ReactLink(Link):
     """
 
     def __init__(self, reaction, pages, description=None, callbacks=[]):
-        """ReactLink constructor
+        """ReactLink constructor.
 
         Create a ReactLink to other pages, with a reaction, and a possibly a
         description, as well as callbacks.
@@ -91,7 +96,7 @@ class MsgLink(Link):
     """Class for link using message to naviguate to next page."""
 
     def __init__(self, pages, description=None, callbacks=[]):
-        """MsgLink constructor
+        """MsgLink constructor.
 
         Create a MsgLink with a list of child pages, a description, and
         callbacks optionally.
@@ -110,7 +115,7 @@ class RootLink(Link):
     """Class for the first link of the help tree."""
 
     def __init__(self, pages, callbacks=[]):
-        """RootLink constructor
+        """RootLink constructor.
 
         RootLink is like any other links (callbacks included), but there is no
         description.

@@ -1,6 +1,13 @@
-from discord_interactive.page import Page, PageType
-from discord_interactive.link import Link, RootLink
+"""Module containing the definition of the `Help` class. The `Help` class
+contains the code to properly display the help tree, and handle interactions
+with the user.
+"""
+
 import asyncio
+
+from discord_interactive.link import RootLink
+from discord_interactive.page import PageType
+
 
 DEFAULT_QUIT_REACT = "❌"
 
@@ -15,7 +22,7 @@ class Help:
     """
 
     def __init__(self, client, pages, callbacks=[], quit_react=DEFAULT_QUIT_REACT):
-        """Help constructor
+        """Help constructor.
 
         Args:
             client (Discord.Client): Discord client (to send messages).
@@ -33,7 +40,7 @@ class Help:
         root = RootLink(pages, callbacks)
         self.tree = root
 
-    async def display(self, member):
+    async def display(self, member):  # noqa: C901
         """Main function of the Help system.
 
         This function is the main function of the help system. When a user
@@ -45,7 +52,6 @@ class Help:
             member (Discord.Member): Member who called help. Help will be
                 displayed as a private message to him.
         """
-
         current_link = self.tree
         prev_input = []
 
