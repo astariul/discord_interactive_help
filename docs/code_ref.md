@@ -3,28 +3,29 @@
 ## Exposed classes
 
 ::: discord_interactive.help
-    rendering:
+    options:
       show_root_heading: False
       show_root_toc_entry: False
+      heading_level: 3
 
 ::: discord_interactive.page
-    selection:
+    options:
       filters: ["!PageType"]
-    rendering:
       show_root_heading: False
       show_root_toc_entry: False
+      heading_level: 3
 
 ## Private classes
 
 ::: discord_interactive.page
-    selection:
+    options:
       filters: ["PageType"]
-    rendering:
       show_root_heading: False
       show_root_toc_entry: False
+      heading_level: 3
 
 ::: discord_interactive.link
-    rendering:
+    options:
       show_root_heading: False
       show_root_toc_entry: False
       heading_level: 3
