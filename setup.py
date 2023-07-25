@@ -16,7 +16,7 @@ extras_require["dev"] = extras_require["hook"] + extras_require["lint"]
 
 setuptools.setup(
     name="discord_interactive",
-    version="4.0",
+    version="4.1.0.dev0",
     author="Nicolas REMOND",
     author_email="remondnicola@gmail.com",
     license="MIT",
