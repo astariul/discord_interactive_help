@@ -1,0 +1,60 @@
+site_name: Discord Interactive Help
+repo_url: "https://github.com/astariul/discord_interactive_help"
+repo_name: "astariul/discord_interactive_help"
+
+theme:
+  name: material
+  custom_dir: docs/mkdocs
+  logo: "assets/discord.svg"
+  favicon: "assets/discord.svg"
+  features:
+    - navigation.sections
+  palette:
+    - scheme: default
+      primary: teal
+      accent: amber
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - attr_list
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+nav:
+  - Welcome: "index.md"
+  - "usage.md"
+  - "design.md"
+  - "customization.md"
+  - Code reference:
+    - "code_ref.md"
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          rendering:
+            show_root_heading: True
+            show_root_full_path: False
+            members_order: source
+
+extra:
+  generator: false
+  version:
+    provider: mike
+
+extra_css:
+  - css/mkdocstrings.css

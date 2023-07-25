@@ -9,13 +9,14 @@ reqs = []
 extras_require = {
     "hook": ["pre-commit~=3.0"],
     "lint": ["black~=23.1", "ruff~=0.0.272"],
+    "docs": ["mkdocs-material~=9.0", "mkdocstrings[python]~=0.18", "mike~=1.1"],
 }
 extras_require["all"] = sum(extras_require.values(), [])
 extras_require["dev"] = extras_require["hook"] + extras_require["lint"]
 
 setuptools.setup(
     name="discord_interactive",
-    version="4.0",
+    version="4.1.0.dev0",
     author="Nicolas REMOND",
     author_email="remondnicola@gmail.com",
     license="MIT",
