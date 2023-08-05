@@ -34,7 +34,7 @@ body:
       value: |-
         - Python: `python --version`
         - discord_interactive_help: `pip show discord-interactive | grep -E ^Version`
-        - discordpy: `pip show discord | grep -E ^Version`
+        - discordpy: `pip show discord.py | grep -E ^Version`
     validations:
       required: true
   - type: textarea
