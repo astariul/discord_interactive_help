@@ -15,7 +15,7 @@
         <link rel="next" href="../design/">
       
       <link rel="icon" href="../assets/discord.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
@@ -646,18 +646,22 @@
 <h2 id="advanced">Advanced</h2>
 <p>In the basic example, you saw how to display a help manual and allow the user to easily interact with this manual.</p>
 <p>But as we will see shortly, you can also use callbacks to bring dynamic contents to your interactive help.</p>
-<p>Callbacks allow you bring dynamic contents and interactions in three ways :
-* Update the content of the next page
-* Choose a path between several pages
-* Get user input</p>
+<p>Callbacks allow you bring dynamic contents and interactions in three ways :</p>
+<ul>
+<li>Update the content of the next page</li>
+<li>Choose a path between several pages</li>
+<li>Get user input</li>
+</ul>
 <h3 id="callback-signature">Callback Signature</h3>
 <p>Your callback should follow this signature :</p>
 <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">callback_name</span><span class="p">(</span><span class="n">link</span><span class="p">:</span> <span class="n">Link</span><span class="p">,</span> <span class="n">member</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Member</span><span class="p">,</span> <span class="n">prev_input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">discord</span><span class="o">.</span><span class="n">Message</span><span class="p">])</span>
 </code></pre></div>
-<p>where :
-* <code>link</code> is the current link being displayed to the user.
-* <code>member</code> is the member that is currently using the interactive help.
-* <code>prev_input</code> is the list of messages previously inputted but the user. If the user didn't input anything, this list is empty.</p>
+<p>where :</p>
+<ul>
+<li><code>link</code> is the current link being displayed to the user.</li>
+<li><code>member</code> is the member that is currently using the interactive help.</li>
+<li><code>prev_input</code> is the list of messages previously inputted but the user. If the user didn't input anything, this list is empty.</li>
+</ul>
 <div class="admonition warning">
 <p class="admonition-title">Important</p>
 <p>Your callback should be asynchronous.</p>
