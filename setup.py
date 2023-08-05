@@ -4,7 +4,7 @@ import setuptools
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-reqs = []
+reqs = ["discord.py~=2.3"]
 
 extras_require = {
     "hook": ["pre-commit~=3.0"],
