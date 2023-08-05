@@ -89,6 +89,7 @@ In the basic example, you saw how to display a help manual and allow the user to
 But as we will see shortly, you can also use callbacks to bring dynamic contents to your interactive help.
 
 Callbacks allow you bring dynamic contents and interactions in three ways :
+
 * Update the content of the next page
 * Choose a path between several pages
 * Get user input
@@ -102,6 +103,7 @@ async def callback_name(link: Link, member: discord.Member, prev_input: List[dis
 ```
 
 where :
+
 * `link` is the current link being displayed to the user.
 * `member` is the member that is currently using the interactive help.
 * `prev_input` is the list of messages previously inputted but the user. If the user didn't input anything, this list is empty.

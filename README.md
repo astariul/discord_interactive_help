@@ -1,18 +1,38 @@
-# Discord Interactive Help
+<h1 align="center">Discord Interactive Help</h1>
 
 ![gif](https://user-images.githubusercontent.com/22237185/53283254-da5a3100-3786-11e9-95cd-cd4dd4859bd2.gif)
 
+<p align="center">
 A Discord python framework to display an interactive help easily.
+</p>
 
-## Features
+<p align="center">
+    <a href="https://github.com/astariul/discord_interactive_help/releases"><img src="https://img.shields.io/github/release/astariul/discord_interactive_help.svg" alt="GitHub release" /></a>
+    <a href="https://github.com/astariul/discord_interactive_help/actions/workflows/lint.yaml"><img src="https://github.com/astariul/discord_interactive_help/actions/workflows/lint.yaml/badge.svg" alt="Lint status" /></a>
+    <a href="https://astariul.github.io/discord_interactive_help"><img src="https://img.shields.io/website?down_message=failing&label=docs&up_color=green&up_message=passing&url=https%3A%2F%2Fastariul.github.io%2Fdiscord_interactive_help" alt="Docs" /></a>
+    <a href="https://github.com/astariul/pytere/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="licence" /></a>
+</p>
+
+<p align="center">
+  <a href="#features">Features</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#example">Example</a> •
+  <a href="#advanced">Advanced</a>
+  <a href="#running-in-docker">Running in Docker</a> •
+  <a href="#notes">Notes</a>
+  <br>
+  <a href="https://astariul.github.io/discord_interactive_help/" target="_blank">Documentation</a>
+</p>
+
+<h2 align="center">Features</h2>
 
 * 🔆 **Easy to naviguate** : Use reactions to naviguate through the Help manual.
 * ⚙ **Customized reaction** : Use any emoji as naviguation icon.
 * 🎮 **Commands support** : Go even further with interactive commands.
 
-## How to use
+<h2 align="center">Usage</h2>
 
-Download the package :
+Install the package :
 
 `pip install discord-interactive`
 
@@ -49,29 +69,27 @@ async def on_message(message):
             await h.display(message.author)
 ```
 
-## Example
+<h2 align="center">Example</h2>
 
-For a full working example, please take a look at the script [`main.py`](https://github.com/astariul/discord_interactive_help/blob/main/main.py).
+You can try the interactive help in [this Discord server](https://discord.gg/cH6hUbw) !
 
-Or you can simply experience the interactivity of this full working example by joining [this Discord server](https://discord.gg/cH6hUbw). Just type /help in the chat !
+Simply join the server, and type `/help` in the chat.
 
-## Further details
+Also, take a look at the code for this interactive help ! Check out the script [`main.py`](https://github.com/astariul/discord_interactive_help/blob/main/main.py).
 
-Check out the [wiki](https://github.com/astariul/discord_interactive_help/wiki) !
+<h2 align="center">Advanced</h2>
 
-You can also check the [documentation](https://github.com/astariul/discord_interactive_help/wiki/Documentation).
-
----
-
-The basic usage was shown in this README. If you are interested in **advanced usage** such as **interactive commands**, please take a look at the source code in [`main.py`](https://github.com/astariul/discord_interactive_help/blob/main/main.py).
+If you are interested in **advanced usage** such as **interactive commands**, take a look at the [full documentation](https://astariul.github.io/discord_interactive_help/4.0/usage/#advanced).
 
 Example of advanced usage :
 
 ![gif](https://user-images.githubusercontent.com/22237185/53492662-c4c56e00-3adc-11e9-8be8-1b10d9f85e8a.gif)
 
-If you can't find what you are looking for, or need help about this library, you can open an [issue](https://github.com/astariul/discord_interactive_help/issues), we will be glad to help !
+---
 
-## Running in Docker
+If you can't find what you are looking for, or need help about this library, you can open a [discussion thread](https://github.com/astariul/discord_interactive_help/discussions) or an [issue](https://github.com/astariul/discord_interactive_help/issues), we will be glad to help !
+
+<h2 align="center">Running in Docker</h2>
 
 A Dockerfile is available to run the example easily. Just build the image :
 
@@ -85,21 +103,8 @@ And then start it with your Discord bot token :
 DISCORD_BOT_SECRET="<your_token>" docker run -e DISCORD_BOT_SECRET discord_interactive_help
 ```
 
-## Notes
+<h2 align="center">Notes</h2>
 
 * *This idea was already known for some time, I didn't get the idea myself. I just wanted to share an easy framework to implement it for your own bot.*
 
 * *This is working only with the Python Discord API.*
-
-## History
-
-* **v4**
-    * Added `Embed` support. Refer to the [official Discord documentation](https://discordpy.readthedocs.io/en/latest/api.html#embed) for more information.
-    * Message are now displayed as `Embed` by default. You can still create raw-message pages with the `embed=False` argument.
-
-* **v3**
-    * Refactor API
-
-* **v2.1**
-    * Added support for the new version of `Discord py`. Just download the last version of the package (`pip install -U discord-interactive`).
-    * If you still use the old version of `Discord py`, then keep using the version `1.1` of this package (`pip install 'discord-interactive==1.1' --force-reinstall`)
