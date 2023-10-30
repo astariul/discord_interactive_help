@@ -157,10 +157,10 @@ class Page:
                 to the number of child pages.
         """
         # Normalize list of pages
-        if type(pages) != list:
+        if not isinstance(pages, list):
             pages = [pages]
 
-        if type(parent_reaction) == list:
+        if isinstance(parent_reaction, list):
             if len(pages) != len(parent_reaction):
                 raise ValueError(
                     "You gave a list of reaction for the parent "
@@ -196,10 +196,10 @@ class Page:
                 to the number of pages given.
         """
         # Normalize list of pages
-        if type(pages) != list:
+        if not isinstance(pages, list):
             pages = [pages]
 
-        if type(root_reaction) == list:
+        if isinstance(root_reaction, list):
             if len(pages) != len(root_reaction):
                 raise ValueError(
                     "You gave a list of reaction for the root "
