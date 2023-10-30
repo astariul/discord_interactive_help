@@ -40,11 +40,11 @@ class Link:
                 this link. Defaults to empty list.
         """
         # Normalize input
-        if type(pages) == list:
+        if isinstance(pages, list):
             self.pages = pages
         else:
             self.pages = [pages]
-        if type(callbacks) == list:
+        if isinstance(callbacks, list):
             self.callbacks = callbacks
         else:
             self.callbacks = [callbacks]
