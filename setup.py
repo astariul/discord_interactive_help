@@ -8,7 +8,7 @@ reqs = ["discord.py~=2.3"]
 
 extras_require = {
     "hook": ["pre-commit~=3.0"],
-    "lint": ["black~=23.1", "ruff~=0.0.272"],
+    "lint": ["black~=23.1", "ruff~=0.1"],
     "docs": ["mkdocs-material~=9.0", "mkdocstrings[python]~=0.18", "mike~=1.1"],
 }
 extras_require["all"] = sum(extras_require.values(), [])
