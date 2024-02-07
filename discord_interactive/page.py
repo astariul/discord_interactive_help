@@ -2,7 +2,6 @@
 class to define the pages of your interactive help for your Discord bot.
 """
 
-
 from enum import Enum, auto
 
 import discord

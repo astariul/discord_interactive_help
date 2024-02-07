@@ -1,6 +1,5 @@
 """Example of a Discord bot with interactive help."""
 
-
 import os
 
 import discord
