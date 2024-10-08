@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 reqs = ["discord.py~=2.3"]
 
 extras_require = {
-    "hook": ["pre-commit~=3.0"],
+    "hook": ["pre-commit~=4.0"],
     "lint": ["black~=24.1", "ruff~=0.1"],
     "docs": ["mkdocs-material~=9.0", "mkdocstrings[python]~=0.18", "mike~=2.0"],
 }
